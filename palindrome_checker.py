@@ -15,7 +15,7 @@ class PalindromeChecker(object):
     def is_palindrome(self, phrase):
         if phrase == "":
             return False
-        chars = [".", ",", "/", "?", "\'", "\\", ";", ":", "]", "}", "[", "{", "|", "=", "+", "-", "(", ")", "_", "0", "!", " "]#98*7&6^5%4$3#2@1!"]
+        chars = [".", ",", "/", "?", "\'", "\\", ";", ":", "]", "}", "[", "{", "|", "=", "+", "-", "(", ")", "_", "0", "!", " ", "9", "8", "*", "7", "&", "6", "5", "4", "3", "2", "1", "@", "#", "$"]
         if not self.strict:
             for char in chars: 
                 phrase = phrase.replace(char, "")
@@ -26,12 +26,20 @@ class PalindromeChecker(object):
             deque.add_rear(letter)
         while deque.size() > 1:
             if deque.remove_front() != deque.remove_rear():
-                return False   
+                return False 
         return True
 
 def main(): 
     p = PalindromeChecker()
-    print(p.is_palindrome("A man, a plan, a canal: PANAMA!"))
+    strict_mode = input("Do you want strict mode on? (y/N) ")
+    if strict_mode.lower() == "y": 
+        p.set_strict_mode(True)
+    phrase = input("What phrase are you wondering is a palindrome? ")
+    is_palindrome = p.is_palindrome(phrase)
+    if is_palindrome: 
+        print("This phrase is a palindrome!")
+    else: 
+        print("This phrase is not a palindrome")
 
 if __name__ == "__main__":
     main()
